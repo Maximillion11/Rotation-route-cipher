@@ -16,7 +16,7 @@ public class cypher {
     private char[] generateGrid (String inputText, int[] gridDimensions) {
         char[] inputGrid = new char[gridDimensions[0] * gridDimensions[1]];
 
-        for (int i = 0; i < (gridDimensions[0] * gridDimensions[1]); i++) {
+        for (int i = 0; i < inputGrid.length; i++) {
             inputGrid[i] = inputText.charAt(i);
         }
 
