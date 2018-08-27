@@ -11,45 +11,31 @@ public class cypher {
     }
 
     public static void cyphera (String inputText, int gridX, int gridY, boolean rotateClockwise) {
-        int[] gridDimensions = { gridX, gridY };
-        char[] inputGrid = generateGrid(inputText.toUpperCase(), gridDimensions);
-
+        char[][] inputGrid = generateGrid(inputText.toUpperCase(), gridX, gridY);
         String outputString = "";
-        int index = 0;
-        if (rotateClockwise) {
-            //Clockwise
-            for (int y = 0; y < gridDimensions[1]; y++) {
-                index = (gridDimensions[0] * (y + 1)) - 1;
-                outputString += inputGrid[index];
-            }
-            for (int x = gridDimensions[0] - 2; x >= 0; x--) {
-                index = x + (gridDimensions[0] * (gridDimensions[1] - 1));
-                outputString += inputGrid[index];
-            }
-            for (int y = gridDimensions[1] - 2; y >= 0; y--) {
-                index = y * gridDimensions[0];
-                outputString += inputGrid[index];
-            }
-            for (int x = 1; x < gridDimensions[0] - 1; x++) {
-                index = x;
-                outputString += inputGrid[index];
-            }
+        int xMoveAmount = gridX;
+        int yMoveAmount = gridY;
 
-            System.out.println(outputString);
-        } else {
-            //Anti-Clockwise
-
+        for (int y = 0; y < yMoveAmount; y++) {
+            for (int x = 0; x < xMoveAmount; x++) {
+                outputString += inputGrid[x][y];
+            }
         }
+
+        System.out.println(outputString);
     }
 
-    private static char[] generateGrid (String inputText, int[] gridDimensions) {
-        char[] inputGrid = new char[gridDimensions[0] * gridDimensions[1]];
+    private static char[][] generateGrid (String inputText, int gridX, int gridY) {
+        char[][] inputGrid = new char[gridX][gridY];
 
-        for (int i = 0; i < inputGrid.length; i++) {
-            if (i < inputText.length()) {
-                inputGrid[i] = inputText.charAt(i);
-            } else {
-                inputGrid[i] = 'X';
+        for (int y = 0; y < gridY; y++) {
+            for (int x = 0; x < gridX; x++) {
+                int inputCharacter = x + (gridX * y);
+                if (inputCharacter < inputText.length()) {
+                    inputGrid[x][y] = inputText.charAt(inputCharacter);
+                } else {
+                    inputGrid[x][y] = 'X';
+                }
             }
         }
 
